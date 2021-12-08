@@ -29,29 +29,28 @@ def oxygenGen(inputs):
     oxygen = inputs.copy()
     for x in range(len(oxygen[0])):
         sum = 0
-        for x in range(len(oxygen[0])):
-            for y in oxygen:
-                sum = sum + int(y[x])
-            for q in oxygen:
-                if sum >= len(oxygen) / 2:  # most common bit is 1
-                    if int(q[x]) == 0:
-                        if (q in oxygen) and (len(oxygen) > 1):
-                            oxygen.remove(q)
-                else:  # most common bit is 0
-                    if int(q[x]) == 1:
-                        if q in oxygen and len(oxygen) > 1:
-                            oxygen.remove(q)
-        return oxygen
+        for y in oxygen:
+            sum = sum + int(y[x])
+        temp = oxygen.copy()
+        for q in temp:
+            if sum >= len(temp) / 2:  # most common bit is 1
+                if int(q[x]) == 0:
+                    if (q in oxygen) and (len(oxygen) > 1):
+                        oxygen.remove(q)
+            else:  # most common bit is 0
+                if int(q[x]) == 1:
+                    if q in oxygen and len(oxygen) > 1:
+                        oxygen.remove(q)
+    return oxygen
 def scrubberGen(inputs):
     scrubber = inputs.copy()
     for x in range(len(scrubber[0])):
         sum = 0
         for y in scrubber:
             sum = sum + int(y[x])
-        # print(int(y)<<x)
-        # print(sum)
-        for q in scrubber:
-            if sum >= len(scrubber) / 2:  # most common bit is 1
+        temp = scrubber.copy()
+        for q in temp:
+            if sum >= len(temp) / 2:  # most common bit is 1
                 if int(q[x]) == 1:
                     if q in scrubber and len(scrubber) > 1:
                         scrubber.remove(q)
@@ -83,11 +82,10 @@ def main():
             gamma = gamma + 2 ** (11 - x)
         else:
             epsilon = epsilon + 2 ** (11 - x)
-    print(gamma * epsilon)
+    print("puzzle 1 ans: " + str(gamma * epsilon))
     oxygen = oxygenGen(inputs)
     scrubber = scrubberGen(inputs)
-    print(oxygen)
-    print(scrubber)
+    print("puzzle 2 ans: " + str(binaryToInt(oxygen)*binaryToInt(scrubber)))
 
 
 
