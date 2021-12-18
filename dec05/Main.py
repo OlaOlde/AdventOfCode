@@ -1,5 +1,5 @@
 import re
-
+import numpy as np
 
 def fixInput(input):
     xValues = []
@@ -14,27 +14,24 @@ def fixInput(input):
 
     return
 def removeDiag(x, y):
-    ind = len(x)
+    ind = len(x)-1
+    indexes = []
     for i in range(0,len(x)-2,2):
-        ind = ind - i
-        if x[ind] - x[ind - 1] != 0 and y[ind]-y[ind - 1] != 0:
-            x[ind-1:ind] = []
-            y[ind-1:ind] = []
-    return x, y
+        z = ind - i
+        if x[z] - x[z - 1] != 0 and y[z]-y[z - 1] != 0:
+            x.pop(z)
+            y.pop(z)
+    return x,y
+def fillMap(x,y):
+
 def getMatrix(lines):
     return
 def main():
     input = open("input.txt").read().splitlines()
-   # x = map(fixInput, input)
-   # print(list(x))
-    #x, y = fixUnput(input) #(input[0])
     x, y = fixInput(input)
-    #print(x)
-    #print(y)
-    print(len(x))
-   # z = [0, 1,2,3,4,5,6,7,9]
-   # print(z)
-   # print(len(z))
-
-   # newx, newy = removeDiag(x,y)
+    newx, newy = removeDiag(x,y)
+    map = np.zeros((1000,1000))
+    map[0,0] = 1
+    map[999,999] = 999
+    print(map)
 main()
